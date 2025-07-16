@@ -1,0 +1,26 @@
+# Dockerfile.backend
+# Use a slim Python image for smaller size
+FROM python:3.9-slim-buster
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy requirements file and install dependencies
+# This step is optimized to use Docker's layer caching. If requirements.txt doesn't change,
+# Docker won't re-run pip install.
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application code into the container.
+# This includes main.py, fraud_detection_verified.py, and the renamed ngo_fraud.csv
+COPY main.py /app/
+COPY fraud_detection_verified.py /app/
+COPY ngo_fraud.csv /app/  # Updated from social_media_fraud.csv
+COPY DEhli.csv /app/ # Keep this if it's used
+
+# Expose the port FastAPI will run on (Cloud Run will use this)
+EXPOSE 8000
+
+# Command to run the FastAPI application using Uvicorn.
+# It listens on all network interfaces (0.0.0.0) on port 8000.
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

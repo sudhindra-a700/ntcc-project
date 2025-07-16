@@ -1,0 +1,22 @@
+fastapi==0.111.0
+uvicorn==0.30.1
+pydantic==2.7.4
+requests==2.32.3
+firebase-admin==6.5.0
+algoliasearch==2.7.0
+transformers==4.42.3
+torch==2.3.1
+datasets==2.20.0
+shap==0.45.0
+numpy==1.26.4
+pandas==2.2.2
+matplotlib==3.9.0
+scikit-learn==1.5.0
+streamlit==1.36.0
+beautifulsoup4==4.12.3
+lxml==5.2.2
+instamojo-wrapper==0.4
+torch 
+transformers
+sentencepiece
+IndicTransToolkit @ git+https://github.com/AI4Bharat/IndicTransToolkit.git
