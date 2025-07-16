@@ -1,0 +1,21 @@
+# Dockerfile.frontend
+# Use a slim Python image for smaller size
+FROM python:3.9-slim-buster
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy requirements file and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application code into the container.
+# This includes frontend.py
+COPY . /app
+
+# Expose the port Streamlit will run on (Cloud Run will use this)
+EXPOSE 8501
+
+# Command to run the Streamlit application.
+# It listens on all network interfaces (0.0.0.0) on port 8501.
+CMD ["streamlit", "run", "frontend.py", "--server.port=8501", "--server.address=0.0.0.0"]
